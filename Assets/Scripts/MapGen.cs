@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Splines;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Splines;  
 
@@ -14,7 +14,7 @@ public class MapGen : MonoBehaviour
 
     void Start()
     {
-
+        float3(float x, float y, float z);
         Cursor.SetCursor(Texture2D.redTexture, new Vector2(1,1), CursorMode.Auto);
         spline = new();     
         path = new List<GameObject>();
@@ -23,16 +23,18 @@ public class MapGen : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        PlacePoint();
+        NewPoint();
     }
 
-    void PlacePoint()
+    void NewPoint()
     {
+        spline.Add(new BezierKnot(Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, -3))));
+        spline[spline.Count].Position = Input.mousePosition;
         if (Input.GetMouseButtonDown(0))
         {
 
 
-            spline.Add(new BezierKnot(Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, -3))));
+            
 
 
 
