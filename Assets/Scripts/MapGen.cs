@@ -14,7 +14,7 @@ public class MapGen : MonoBehaviour
 
     void Start()
     {
-        float3(float x, float y, float z);
+        
         Cursor.SetCursor(Texture2D.redTexture, new Vector2(1,1), CursorMode.Auto);
         spline = new();     
         path = new List<GameObject>();
@@ -29,7 +29,7 @@ public class MapGen : MonoBehaviour
     void NewPoint()
     {
         spline.Add(new BezierKnot(Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, -3))));
-        spline[spline.Count].Position = Input.mousePosition;
+        //spline[spline.Count].Position = Input.mousePosition;
         if (Input.GetMouseButtonDown(0))
         {
 
