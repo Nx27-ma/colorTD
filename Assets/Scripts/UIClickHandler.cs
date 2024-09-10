@@ -12,13 +12,26 @@ public class UIClickHandler : MonoBehaviour
 
     GameObject canvas;
     GameObject[] panels;
+    GameObject[] buttonsTemp;
+    Button[] buttons;
     void Start()
     {
         canvas = GameObject.FindGameObjectWithTag("Canvas");
         int childAmount = canvas.transform.childCount;
         panels = getDirectChildren(childAmount, canvas);
         Type buttonType = typeof(Button);
-        getAllChildrenOfType(panels[(int)PanelType.main], buttonType);
+        buttonsTemp = getAllChildrenOfType(panels[(int)PanelType.main], buttonType);
+        getButtons();
+    }
+
+    void getButtons()
+    {
+        buttons = new Button[buttonsTemp.Length];
+        for (int i = 0; i < buttonsTemp.Length; i++)
+        {
+            buttons[i] = buttonsTemp[i].gameObject.GetComponent<Button>();
+        }
+
     }
 
     GameObject[] getDirectChildren(int childAmount, GameObject parentObj)
@@ -67,10 +80,18 @@ public class UIClickHandler : MonoBehaviour
 
     public void towerButton()
     {
-        Onclick.addlistern(funcite);
+        //Onclick.addlistern(funcite);
+        for (int i = 0; buttons.Length > 0; i++)
+        {
+            //buttons[i].onClick.AddListener();
+        }
+        
     }
 
-
+    void buttonPressed()
+    {
+        bool pressed = true;
+    }
 
 
 
