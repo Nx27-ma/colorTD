@@ -68,7 +68,7 @@ public class UIClickHandler : MonoBehaviour
                   .Select(i => i.gameObject)
                   //.Take(childAmount)
                   .ToArray();
-
+        Debug.Log(filtered.Length);
         return filtered;
     }
 
@@ -78,12 +78,12 @@ public class UIClickHandler : MonoBehaviour
 
     }
 
-    public void towerButton()
+    public void addListenerToButtons()
     {
-        //Onclick.addlistern(funcite);
+        
         for (int i = 0; buttons.Length > 0; i++)
         {
-            //buttons[i].onClick.AddListener();
+           buttons[i].onClick.AddListener(buttonPressed);
         }
         
     }
@@ -91,7 +91,9 @@ public class UIClickHandler : MonoBehaviour
     void buttonPressed()
     {
         bool pressed = true;
-    }
+       
+           
+            }
 
 
 
