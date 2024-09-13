@@ -1,8 +1,5 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -37,11 +34,11 @@ public class UIClickHandler : MonoBehaviour
     GameObject[] getDirectChildren(int childAmount, GameObject parentObj)
     {
         GameObject[] children = new GameObject[childAmount];
-     
-            for (int i = 0; i < childAmount; i++)
-            {
-                children[i] = parentObj.transform.GetChild(i).gameObject;
-            }   
+
+        for (int i = 0; i < childAmount; i++)
+        {
+            children[i] = parentObj.transform.GetChild(i).gameObject;
+        }
 
         return children;
     }
@@ -72,32 +69,11 @@ public class UIClickHandler : MonoBehaviour
         return filtered;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void towerSelect(GameObject type)
     {
+        Instantiate(type);
 
     }
-
-    public void addListenerToButtons()
-    {
-        
-        for (int i = 0; buttons.Length > 0; i++)
-        {
-           buttons[i].onClick.AddListener(buttonPressed);
-        }
-        
-    }
-
-    void buttonPressed()
-    {
-        bool pressed = true;
-       
-           
-            }
-
-
-
-
 
     enum PanelType
     {
