@@ -16,8 +16,7 @@ public class MapGen : MonoBehaviour
     {
         
         Cursor.SetCursor(Texture2D.redTexture, new Vector2(1,1), CursorMode.Auto);
-        spline = new();     
-        path = new List<GameObject>();
+        spline = new();    
     }
 
     // Update is called once per frame
