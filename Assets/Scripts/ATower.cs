@@ -17,7 +17,7 @@ public class ATower : MonoBehaviour
 
     void Start()
     {
-        
+        Debug.Log("ATower");
 
     }
 

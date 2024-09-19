@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Splines;  
 
@@ -12,14 +13,25 @@ public class MapGen : MonoBehaviour
     List<Transform> path;
     public Spline spline;
     int i = 0;
+    private GameObject pathRef;
 
     void Start()
     {
-        path = GameObject.Find("PathPoints").GetComponentsInChildren<Transform>().ToList();
-        Cursor.SetCursor(Texture2D.redTexture, new Vector2(1,1), CursorMode.Auto);
-        spline = new();
 
+        pathRef = GameObject.Find("PathPoints");
+
+        path = pathRef.GetComponentsInChildren<Transform>().ToList();
+        Cursor.SetCursor(Texture2D.redTexture, new Vector2(1, 1), CursorMode.Auto);
+        var splineContainer = pathRef.AddComponent<SplineContainer>();
+        spline = new();
         createPath();
+        splineContainer.AddSpline(spline);
+        var splineExtrude = pathRef.AddComponent<SplineExtrude>();
+        splineExtrude.Container = splineContainer;
+        if (pathRef.TryGetComponent<MeshFilter>(out var meshFilter))
+        {
+            meshFilter.sharedMesh = GameObject.CreatePrimitive(PrimitiveType.Sphere).GetComponent<MeshFilter>().mesh;
+        }
     }
 
     // Update is called once per frame
@@ -28,7 +40,7 @@ public class MapGen : MonoBehaviour
        
     }
 
-    createPath()
+    void createPath()
     {
         foreach (Transform pathPoint in path)
         {
