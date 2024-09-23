@@ -2689,9 +2689,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 967bf01c3dbda7e42b8bd529bc386e4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cursorOverlay: {fileID: 0}
+  path: []
   spline:
     m_EditModeType: 1
     m_Knots: []
+    m_Length: -1
     m_MetaData: []
     m_Closed: 0
     m_IntData:
@@ -2702,6 +2705,8 @@ MonoBehaviour:
       m_Data: []
     m_ObjectData:
       m_Data: []
+  i: 0
+  pathRef: {fileID: 0}
 --- !u!1 &2145063544
 GameObject:
   m_ObjectHideFlags: 0
