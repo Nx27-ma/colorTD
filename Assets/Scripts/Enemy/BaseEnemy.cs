@@ -5,10 +5,14 @@ using UnityEngine;
 
 public class BaseEnemy : MonoBehaviour
 {
+    private GameObject path;
+    private GameObject[] pathChildren;
    
     void Start()
-    {
-        //path = GameObject.FindWithTag("DEFAULT").GetComponent<MapGen>();
+    { 
+        path = GameObject.FindWithTag("PathPoints");
+        pathChildren = UIClickHandler.getDirectChildren(path);
+            
     }
 
 }

@@ -18,7 +18,7 @@ public class UIClickHandler : MonoBehaviour
     {
         canvas = GameObject.FindGameObjectWithTag("Canvas");
         int childAmount = canvas.transform.childCount;
-        panels = getDirectChildren(childAmount, canvas);
+        panels = getDirectChildren(canvas);
         Type buttonType = typeof(Button);
         buttonsTemp = getAllChildrenOfType(panels[(int)PanelType.main], buttonType);
         getButtons();
@@ -34,14 +34,19 @@ public class UIClickHandler : MonoBehaviour
 
     }
 
-    GameObject[] getDirectChildren(int childAmount, GameObject parentObj)
+    public static GameObject[] getDirectChildren(GameObject parentObj, int amount = 0)
     {
+        int childAmount = parentObj.transform.childCount;
+        if (amount != 0)
+        {
+            childAmount = amount;
+        }
         GameObject[] children = new GameObject[childAmount];
-     
-            for (int i = 0; i < childAmount; i++)
-            {
-                children[i] = parentObj.transform.GetChild(i).gameObject;
-            }   
+
+        for (int i = 0; i < childAmount; i++)
+        {
+            children[i] = parentObj.transform.GetChild(i).gameObject;
+        }
 
         return children;
     }
@@ -80,20 +85,20 @@ public class UIClickHandler : MonoBehaviour
 
     public void addListenerToButtons()
     {
-        
+
         for (int i = 0; buttons.Length > 0; i++)
         {
-           buttons[i].onClick.AddListener(buttonPressed);
+            buttons[i].onClick.AddListener(buttonPressed);
         }
-        
+
     }
 
     void buttonPressed()
     {
         bool pressed = true;
-       
-           
-            }
+
+
+    }
 
 
 

@@ -13,6 +13,6 @@ public class BezierPath
 
    public static Vector2 EvalCubic(Vector2 a, Vector2 b, Vector2 c, Vector2 d, float t)
    {
-      
+      return new Vector2();
    }
 }
