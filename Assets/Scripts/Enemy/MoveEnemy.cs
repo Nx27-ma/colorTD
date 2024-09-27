@@ -26,25 +26,21 @@ public class MoveEnemy : MonoBehaviour
     IEnumerator moveBetweenPoints(int i)
     {
         transform.position = Vector3.MoveTowards(transform.position, pathChildren[i].transform.position, speed);
-        Debug.Log("posUpdated");
         yield return new WaitForFixedUpdate();
         if (transform.position != pathChildren[i].transform.position)
         {
             StartCoroutine(moveBetweenPoints(i));
+
         }
         else if (i > pathChildren.Length)
         {
             Debug.Log("Done");
-            
+
         }
         else
         {
             i++;
             StartCoroutine(moveBetweenPoints(i));
-        }
-
-
+        }      
     }
-
-
 }
