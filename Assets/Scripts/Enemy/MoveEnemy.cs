@@ -29,16 +29,18 @@ public class MoveEnemy : MonoBehaviour
         yield return new WaitForFixedUpdate();
         if (transform.position != pathChildren[i].transform.position)
         {
+            Debug.Log("repeat");
             StartCoroutine(moveBetweenPoints(i));
 
         }
-        else if (i > pathChildren.Length)
+        else if (i == pathChildren.Length - 1)
         {
             Debug.Log("Done");
 
         }
         else
         {
+            Debug.Log("i++");
             i++;
             StartCoroutine(moveBetweenPoints(i));
         }      

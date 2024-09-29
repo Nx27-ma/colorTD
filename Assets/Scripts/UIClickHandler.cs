@@ -12,14 +12,14 @@ public class UIClickHandler : MonoBehaviour
 
     GameObject canvas;
     GameObject[] panels;
-    GameObject[] buttonsTemp;
+    Transform[] buttonsTemp;
     Button[] buttons;
     void Start()
     {
         canvas = GameObject.FindGameObjectWithTag("Canvas");
         panels = Utils.getDirectChildren(canvas);
         Type buttonType = typeof(Button);
-        buttonsTemp = Utils.getAllChildrenOfType(panels[(int)PanelType.main], buttonType);
+        buttonsTemp = Utils.getAllChildrenOfType<Transform>(panels[(int)PanelType.main].transform, true);
         getButtons();
     }
 

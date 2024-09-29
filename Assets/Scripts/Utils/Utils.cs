@@ -23,7 +23,7 @@ public static class Utils
         return children;
     }
 
-   public static GameObject[] getChildrenByName(string[] names, GameObject parentObj)
+    public static GameObject[] getChildrenByName(string[] names, GameObject parentObj)
     {
         GameObject[] children = new GameObject[names.Length];
         for (int i = 0; i < names.Length; i++)
@@ -38,13 +38,20 @@ public static class Utils
         return children;
     }
 
-
-    public static GameObject[] getAllChildrenOfType(GameObject parentObj, Type type)
+    /// <param name="parentObj">Give the parent of the children you want - Not needed to be direct children</param>
+    /// <param name="giveGameObject">Whether you want it to return a GameObject or just the Components of the type</param>
+    /// <returns>Either the Components of the Children or the GameObjects of the Children</returns>
+    public static T[] getAllChildrenOfType<T>(Transform parentObj, bool giveGameObject) where T : Transform
     {
-        GameObject[] filtered = parentObj.transform.GetComponentsInChildren(type)
-                  .Select(i => i.gameObject)
-                  .ToArray();
-        Debug.Log(filtered.Length);
-        return filtered;
+        if (giveGameObject)
+        {
+            return parentObj.transform.GetComponentsInChildren<T>()
+                          .Select(i => i.transform.GetComponent<T>())
+                          .ToArray();
+        }
+        else
+        {
+            return parentObj.transform.GetComponentsInChildren<T>();
+        }
     }
 }

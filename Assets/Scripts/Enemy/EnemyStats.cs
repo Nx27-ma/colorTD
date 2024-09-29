@@ -21,24 +21,26 @@ public class EnemyStats
 
     public Color[] ColorConversionList = { new Color(0, 255, 0), new Color(150, 0, 255), new Color(255, 150, 0) };
 
-    public EnemyStats(int type)
+    public EnemyStats(TypeEnemy type)
     {
         MainColor = ColorConversionList[UnityEngine.Random.Range(0, ColorConversionList.Length)];
-
-        if (type == (int)TypeEnemy.Normal)
+        switch (type)
         {
-            Speed = 0.025f;
-            Color1 = 2;
-        }
-        else if (type == (int)TypeEnemy.Big)
-        {
-            Speed = 0.010f;
-            Color1 = 4;
-        }
-        else
-        {
-            Speed = 0.05f;
-            Color1 = 1;
+            case TypeEnemy.Normal:
+                Speed = 0.025f;
+                Color1 = 2;
+                break;
+            case TypeEnemy.Big:
+                Speed = 0.010f;
+                Color1 = 4;
+                break;
+            case TypeEnemy.Small:
+                Speed = 0.05f;
+                Color1 = 1;
+                break;
+            default:
+                Debug.LogError($"invalid enemyType:{type}");
+                break;
         }
         Color2 = Color1;
     }
