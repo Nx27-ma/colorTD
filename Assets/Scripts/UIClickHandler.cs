@@ -12,7 +12,6 @@ public class UIClickHandler : MonoBehaviour
 
     GameObject canvas;
     GameObject[] panels;
-    Button[] buttonsTemp;
     Button[] buttons;
     public GameObject SelectedGameObject;
     public TowerPlace towerPlace;
@@ -22,26 +21,42 @@ public class UIClickHandler : MonoBehaviour
         canvas = GameObject.FindGameObjectWithTag("Canvas");
         panels = Utils.getDirectChildren(canvas);
         Type buttonType = typeof(Button);
-        buttonsTemp = Utils.getAllChildrenOfType<Button>(panels[(int)PanelType.main]);
-        getButtons();
+        buttons = Utils.getAllChildrenOfType<Button>(panels[(int)PanelType.main]);
     }
 
-    void getButtons()
+    public void MainScreenPanelButtons(string name)
     {
-        buttons = new Button[buttonsTemp.Length];
-        for (int i = 0; i < buttonsTemp.Length; i++)
+        if (name == "Start")
         {
-            buttons[i] = buttonsTemp[i].gameObject.GetComponent<Button>();
+            panels[(int)PanelType.tower].SetActive(true);
+            panels[(int)PanelType.main].SetActive(false);
         }
-    }
+        else
+        {
+            Application.Quit();
+            Debug.Log("Else statement reached - Should be intended");
+        }
 
-    public void panelBasedActions(GameObject buttonPressed)
+    }
+    public void TowerPlacementPanelButtons(GameObject buttonPressed)
     {
         towerPlace.ButtonClickedAction(Instantiate(buttonPressed));
     }
 
+    public void LossState()
+    {
+        panels[(int)PanelType.main].SetActive(true);
+        panels[(int)PanelType.lost].SetActive(false);
+    }
+
+    public void VictoryState()
+    {
+        panels[(int)PanelType.main].SetActive(true);
+        panels[(int)PanelType.won].SetActive(false);
+    }
+
     enum PanelType
     {
-        main, tower, exit
+        main, tower, lost, won
     }
 }

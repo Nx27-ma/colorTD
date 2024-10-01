@@ -81,12 +81,14 @@ public class TowerPlace : MonoBehaviour
 
 
 
-
     private void OnDrawGizmos()
     {
-        for (int i = 0; i < pathPoints.Length; i++)
+        if (Application.isPlaying)
         {
-            Gizmos.DrawSphere(pathPoints[i].transform.position, 0.5f);
+            for (int i = 0; i < pathPoints.Length; i++)
+            {
+                Gizmos.DrawSphere(pathPoints[i].transform.position, 0.5f);
+            }
         }
     }
 
