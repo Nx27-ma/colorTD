@@ -14,6 +14,7 @@ public class UIClickHandler : MonoBehaviour
     GameObject[] panels;
     Button[] buttonsTemp;
     Button[] buttons;
+    public GameObject SelectedGameObject;
     void Start()
     {
         canvas = GameObject.FindGameObjectWithTag("Canvas");
@@ -30,6 +31,11 @@ public class UIClickHandler : MonoBehaviour
         {
             buttons[i] = buttonsTemp[i].gameObject.GetComponent<Button>();
         }
+    }
+
+    public void panelBasedActions(GameObject buttonPressed)
+    {
+        SelectedGameObject = Instantiate( buttonPressed);
     }
 
     enum PanelType
