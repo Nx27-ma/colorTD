@@ -1,43 +1,61 @@
 using System.Collections;
 using UnityEngine;
+using System;
+using System.Collections.Generic;
 public class TowerPlace : MonoBehaviour
 {
     GameObject Default;
     UIClickHandler uiClickHandler;
-    private Vector3 cursorPos;
     GameObject pathPointObj;
     GameObject[] pathPoints;
 
+    static List<GameObject> towers;
+    static Vector3 cursorPos;
+
+    public Action<GameObject> ButtonClickedAction;
 
     bool path = false, otherTower = false, reinstantiate = true;
-    private bool firstCatch = true;
+  
 
     void Start()
     {
+        towers = new List<GameObject>();
         Default = GameObject.Find("DEFAULT");
         uiClickHandler = Default.GetComponent<UIClickHandler>();        //for interaction with the ui
         pathPointObj = GameObject.Find("PathPoints");
         pathPoints = Utils.getDirectChildren(pathPointObj);
-        LineDraw line = new(new Vector2(1, 1), new Vector2(3, 4), new Vector2(4, 5));
 
+        ButtonClickedAction = inputTowerPlacement;
+    }
+
+    private void  inputTowerPlacement(GameObject obj)
+    {
+        int index = towers.Count;
+        towers.Add(obj);
+
+        StartCoroutine(moveTower(index));
+    }
+
+    IEnumerator moveTower(int index)
+    {
+        towers[index].transform.position = cursorPos;
+        yield return null;
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            
+        }
+        else
+        {
+            StartCoroutine(moveTower(index));
+        }
     }
 
     void Update()
     {
-        cursorPos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0));
-        if (uiClickHandler.SelectedGameObject != null && firstCatch)
-        {
-            StartCoroutine(inputTowerPlacement());
-            firstCatch = false;
-        }
+        cursorPos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 1));
     }
-    private void OnDrawGizmos()
-    {
-        for (int i = 0; i < pathPoints.Length; i++)
-        {
-            Gizmos.DrawSphere(pathPoints[i].transform.position, 0.5f);
-        }
-    }
+    
     bool checkValidPlacement()
     {
         path = false;
@@ -59,20 +77,18 @@ public class TowerPlace : MonoBehaviour
         return true;
     }
 
-    IEnumerator inputTowerPlacement()
+
+
+
+
+
+    private void OnDrawGizmos()
     {
-        uiClickHandler.SelectedGameObject.transform.position = cursorPos;
-        yield return new WaitForFixedUpdate();
-
-        if (Input.GetMouseButtonDown(0))
+        for (int i = 0; i < pathPoints.Length; i++)
         {
-
+            Gizmos.DrawSphere(pathPoints[i].transform.position, 0.5f);
         }
-        else { StartCoroutine(inputTowerPlacement()); }
     }
-
-
-
 
 }
 

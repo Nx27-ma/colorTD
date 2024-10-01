@@ -15,8 +15,10 @@ public class UIClickHandler : MonoBehaviour
     Button[] buttonsTemp;
     Button[] buttons;
     public GameObject SelectedGameObject;
+    public TowerPlace towerPlace;
     void Start()
     {
+        towerPlace = gameObject.GetComponent<TowerPlace>();
         canvas = GameObject.FindGameObjectWithTag("Canvas");
         panels = Utils.getDirectChildren(canvas);
         Type buttonType = typeof(Button);
@@ -35,7 +37,7 @@ public class UIClickHandler : MonoBehaviour
 
     public void panelBasedActions(GameObject buttonPressed)
     {
-        SelectedGameObject = Instantiate( buttonPressed);
+        towerPlace.ButtonClickedAction(Instantiate(buttonPressed));
     }
 
     enum PanelType
