@@ -15,7 +15,8 @@ public class TowerPlace : MonoBehaviour
     public Action<GameObject> ButtonClickedAction;
 
     bool path = false, otherTower = false, reinstantiate = true;
-  
+    private int index;
+    private bool clickedState;
 
     void Start()
     {
@@ -30,30 +31,25 @@ public class TowerPlace : MonoBehaviour
 
     private void  inputTowerPlacement(GameObject obj)
     {
-        int index = towers.Count;
         towers.Add(obj);
-
-        StartCoroutine(moveTower(index));
-    }
-
-    IEnumerator moveTower(int index)
-    {
-        towers[index].transform.position = cursorPos;
-        yield return null;
-
-        if (Input.GetMouseButtonDown(0))
-        {
-            
-        }
-        else
-        {
-            StartCoroutine(moveTower(index));
-        }
+        index = towers.Count -1;
+        clickedState = true;
     }
 
     void Update()
     {
         cursorPos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 1));
+
+        if (clickedState)
+        {
+            towers[index].transform.position = cursorPos;
+
+            if (Input.GetMouseButtonDown(0))
+            {
+                clickedState = false;
+            }
+
+        }
     }
     
     bool checkValidPlacement()
