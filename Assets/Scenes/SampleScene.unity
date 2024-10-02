@@ -374,10 +374,10 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1953992973}
         m_TargetAssemblyTypeName: UIClickHandler, Assembly-CSharp
-        m_MethodName: panelBasedActions
+        m_MethodName: TowerPlacementPanelButtons
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 953626488625390512, guid: 34b749a193eecbc4585c7a4536182a02,
+          m_ObjectArgument: {fileID: 6944288681204248439, guid: c18f1ba390764524aafa7c57051d7924,
             type: 3}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
