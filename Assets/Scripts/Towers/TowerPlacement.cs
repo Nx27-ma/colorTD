@@ -14,7 +14,7 @@ public class TowerPlace : MonoBehaviour
 
     public Action<GameObject> ButtonClickedAction;
 
-    bool path = false, otherTower = false, reinstantiate = true;
+    bool path = false, otherTower = false;
     private int index;
     private bool clickedState;
 

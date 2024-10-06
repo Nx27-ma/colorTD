@@ -26,7 +26,7 @@ public class MoveEnemy : MonoBehaviour
     IEnumerator moveBetweenPoints(int i)
     {
         transform.position = Vector3.MoveTowards(transform.position, pathChildren[i].transform.position, speed);
-        yield return new WaitForFixedUpdate();
+        yield return new ();
         if (transform.position != pathChildren[i].transform.position)
         {
             StartCoroutine(moveBetweenPoints(i));
@@ -34,7 +34,7 @@ public class MoveEnemy : MonoBehaviour
         }
         else if (i == pathChildren.Length - 1)
         {
-
+            EnemyWaves.EnemyDestroyed("EndOfTrack", gameObject);
         }
         else
         {
