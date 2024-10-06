@@ -6,10 +6,20 @@ using UnityEngine;
 
 public class  EnemyData : MonoBehaviour
 {
-    EnemyStats stats;
+    public EnemyStats stats;
+    public bool dead;
     private void Start()
     {
         stats = new EnemyStats();
+
+    }
+
+    private void Update()
+    {
+        if (stats.Color1 == 0 && stats.Color2 == 0)
+        {
+            dead = true;
+        }
     }
 }
 

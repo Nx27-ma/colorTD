@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyWaves : MonoBehaviour
 {
-    List<GameObject> enemies = new List<GameObject>();
+    public static List<GameObject> enemies = new List<GameObject>();
     int waveNumber = 0;
     int waveWeight;
     GameObject generalEnemy;
