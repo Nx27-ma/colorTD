@@ -6,11 +6,11 @@ using UnityEngine;
 public class TowerShoot : MonoBehaviour
 {
     float range = 0.5f;
-    Queue<GameObject> inRange = new Queue<GameObject>();
+    List<GameObject> inRange = new List<GameObject>();
 
     void Start()
     {
-
+        EnemyWaves.EnemyDestroyed += EnemyDied;
     }
 
     void Update()
@@ -20,21 +20,29 @@ public class TowerShoot : MonoBehaviour
 
     void checkRange()
     {
-        for (int i = 0; i < range; i++)
+        for (int i = 0; i < EnemyWaves.Enemies.Count; i++)
         {
-            if (Vector3.Distance(EnemyWaves.enemies[i].transform.position, transform.position) < range)
+            if (Vector3.Distance(EnemyWaves.Enemies[i].transform.position, transform.position) < range)
             {
-                inRange.Enqueue(EnemyWaves.enemies[i]);
+                inRange.Add(EnemyWaves.Enemies[i]);
+            } 
+        }
+
+        for (int i = 0; i < inRange.Count; i++)
+        {
+            if (Vector3.Distance(inRange[i].transform.position, transform.position) > range)
+            {
+                inRange[i] = null;  
             }
         }
+        while (inRange.Contains(null))
+        {
+            inRange.RemoveAt(inRange.FindIndex(i => i == null));
+        }   
     }
 
-    public void EnemyDied(GameObject deadEnemy)
+    public void EnemyDied(string smtn, GameObject deadEnemy)
     {
-        if (inRange.Peek() == deadEnemy)
-        {
-            inRange.Dequeue();
-        }
-
+        inRange.RemoveAt(inRange.FindIndex(i => i == deadEnemy));
     }
 }
