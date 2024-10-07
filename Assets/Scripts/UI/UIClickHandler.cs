@@ -34,9 +34,14 @@ public class UIClickHandler : MonoBehaviour
         }
 
     }
-    public void TowerPlacementPanelButtons(GameObject buttonPressed)
+    public void TowerPlacementButtons(GameObject buttonPressed)
     {
         towerPlace.ButtonClickedAction(Instantiate(buttonPressed));
+    }
+
+    public void NextWave()
+    {
+        EnemyWaves.StartWave();
     }
 
     public void LossState()
