@@ -7,6 +7,7 @@ public class TowerShoot : MonoBehaviour
 {
     float range = 0.5f;
     Queue<GameObject> inRange = new Queue<GameObject>();
+
     void Start()
     {
 
@@ -24,14 +25,16 @@ public class TowerShoot : MonoBehaviour
             if (Vector3.Distance(EnemyWaves.enemies[i].transform.position, transform.position) < range)
             {
                 inRange.Enqueue(EnemyWaves.enemies[i]);
-            } 
-            else if (EnemyWaves.enemies[i].gameObject.GetComponent<EnemyData>().dead)
-            {
-              //als ie gedequeued moet worden   
             }
         }
     }
 
+    public void EnemyDied(GameObject deadEnemy)
+    {
+        if (inRange.Peek() == deadEnemy)
+        {
+            inRange.Dequeue();
+        }
 
-
+    }
 }
