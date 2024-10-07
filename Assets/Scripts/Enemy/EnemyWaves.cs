@@ -4,34 +4,45 @@ using UnityEngine;
 
 public class EnemyWaves : MonoBehaviour
 {
+<<<<<<< Updated upstream
     List<GameObject> enemies = new List<GameObject>();
+=======
+    public static List<GameObject> Enemies = new List<GameObject>();
+    public static Action<string, GameObject> EnemyDestroyed;
+    public static Action StartWave;
+
+>>>>>>> Stashed changes
     int waveNumber = 0;
     int waveWeight;
     GameObject generalEnemy;
-    public static Action<string, GameObject> EnemyDestroyed;
+
 
     void Start()
     {
+        StartWave = generateWave;
         EnemyDestroyed = killEnemy;
         generalEnemy = Resources.Load("Prefabs/Enemies/NormalEnemy") as GameObject;
         print(generalEnemy);
     }
 
-    void Update()
+    void generateWave()
     {
-        if (enemies.Count == 0)
+        if (Enemies.Count == 0)
         {
             waveNumber++;
             waveWeight = (int)(waveNumber * 1.5f);
+
             for (int i = 0; i < waveWeight; i++)
             {
-                enemies.Add(Instantiate(generalEnemy));
+                Enemies.Add(Instantiate(generalEnemy));
             }
         }
     }
+    
 
     void killEnemy(string causeOfDeath, GameObject target)
     {
+        print("Whoops delegate called!");
         if(causeOfDeath == "Player")
         {
             //EconomyAction
@@ -39,10 +50,9 @@ public class EnemyWaves : MonoBehaviour
         else if (causeOfDeath == "EndOfTrack")
         {
             //UIPlayerLoseHP
-            target = enemies[enemies.Count - 1];
         }
 
-        enemies.RemoveAt(enemies.FindIndex(e => e == target));
+        Enemies.RemoveAt(Enemies.FindIndex(e => e == target));
 
         Destroy(target);
     }
