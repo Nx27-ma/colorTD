@@ -4,14 +4,11 @@ using UnityEngine;
 
 public class EnemyWaves : MonoBehaviour
 {
-<<<<<<< Updated upstream
-    List<GameObject> enemies = new List<GameObject>();
-=======
     public static List<GameObject> Enemies = new List<GameObject>();
     public static Action<string, GameObject> EnemyDestroyed;
     public static Action StartWave;
 
->>>>>>> Stashed changes
+
     int waveNumber = 0;
     int waveWeight;
     GameObject generalEnemy;
