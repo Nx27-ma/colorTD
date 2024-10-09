@@ -4,36 +4,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class  EnemyData : MonoBehaviour
+public class EnemyData : MonoBehaviour
 {
-    public EnemyStats stats;
-    public bool dead;
-    private void Start()
-    {
-        stats = new EnemyStats();
+    public Color[] ColorConversionList { get; } = { new Color(0, 255, 0), new Color(150, 0, 255), new Color(255, 150, 0) };
+    public TypeEnemy Type { get; private set; }
+    public Color MainColor { get; private set; } //the color of the enemy
+    public float Color1 { get; private set; }    //the amount of color needed to mix the right color
+    public float Color2 { get; private set; }   //the amount of color needed to mix the right color
+    public float Speed   { get; private set; }  //movementSpeed of the enemy
 
-    }
-
-    private void Update()
-    {
-        if (stats.Color1 == 0 && stats.Color2 == 0)
-        {
-            dead = true;
-        }
-    }
-}
-
-
-
-
-
-public class EnemyStats
-{
-    public TypeEnemy Type { get; }
-    public Color MainColor; //the color of the enemy
-    public float Color1;    //the amount of color needed to mix the right color
-    public float Color2;    //the amount of color needed to mix the right color
-    public float Speed;     //movementspeed of the enemy
     public enum TypeEnemy
     {
         Normal, Big, Small
@@ -44,14 +23,12 @@ public class EnemyStats
         Green, Purple, Orange
     }
 
-    public Color[] ColorConversionList = { new Color(0, 255, 0), new Color(150, 0, 255), new Color(255, 150, 0) };
-
-    public EnemyStats()
+    private void Start()
     {
         MainColor = ColorConversionList[UnityEngine.Random.Range(0, ColorConversionList.Length)];
 
         Type = (TypeEnemy)UnityEngine.Random.Range(0, 3);
-        
+
         switch (Type)
         {
             case TypeEnemy.Normal:
@@ -71,5 +48,12 @@ public class EnemyStats
                 break;
         }
         Color2 = Color1;
+    }
+    private void Update()
+    {
+        if (Color1 == 0 && Color2 == 0)
+        {
+            EnemyWaves.EnemyDestroyed("Player", gameObject);
+        }
     }
 }
