@@ -19,7 +19,11 @@ public class EnemyWaves : MonoBehaviour
         StartWave = generateWave;
         EnemyDestroyed = killEnemy;
         generalEnemy = Resources.Load("Prefabs/Enemies/NormalEnemy") as GameObject;
-        print(generalEnemy);
+    }
+
+    private void Update()
+    {
+        //check how far enemy is on list
     }
 
     void generateWave()
@@ -36,6 +40,15 @@ public class EnemyWaves : MonoBehaviour
         }
     }
     
+
+    void fixOrder()
+    {
+        GameObject tempAscended;
+        GameObject tempDescended;
+
+
+       // TowerShoot.orderChanged(tempAscended, tempDescended);
+    }
 
     void killEnemy(string causeOfDeath, GameObject target)
     {
