@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.UI;
-
+using Utils;
 public class UIClickHandler : MonoBehaviour
 {
     //Set all panels on inactive except main
@@ -15,9 +15,9 @@ public class UIClickHandler : MonoBehaviour
     {
         towerPlace = gameObject.GetComponent<TowerPlace>();
         canvas = GameObject.FindGameObjectWithTag("Canvas");
-        panels = Utils.getDirectChildren(canvas);
+        panels = FindChildren.GetDirectChildren(canvas);
         Type buttonType = typeof(Button);
-        buttons = Utils.getAllChildrenOfType<Button>(panels[(int)PanelType.main]);
+        buttons = FindChildren.GetAllChildrenOfType<Button>(panels[(int)PanelType.main]);
     }
 
     public void MainScreenPanelButtons(string name)

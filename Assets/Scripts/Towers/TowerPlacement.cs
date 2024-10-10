@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using System;
 using System.Collections.Generic;
+using Utils;
 public class TowerPlace : MonoBehaviour
 {
     GameObject Default;
@@ -24,7 +25,7 @@ public class TowerPlace : MonoBehaviour
         Default = GameObject.Find("DEFAULT");
         uiClickHandler = Default.GetComponent<UIClickHandler>();        //for interaction with the ui
         pathPointObj = GameObject.Find("PathPoints");
-        pathPoints = Utils.getDirectChildren(pathPointObj);
+        pathPoints = FindChildren.GetDirectChildren(pathPointObj);
 
         ButtonClickedAction = inputTowerPlacement;
     }

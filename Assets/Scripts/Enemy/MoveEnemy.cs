@@ -1,14 +1,19 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml.Schema;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
+using Utils;
+
 
 
 public class MoveEnemy : MonoBehaviour
 {
     private GameObject path;
     private GameObject[] pathChildren;
-    private float speed = 0.1f;
+    private float speed;
+    public float totalDistanceMovedOverLine { get; private set; }
 
     void Start()
     {
@@ -17,29 +22,35 @@ public class MoveEnemy : MonoBehaviour
             path = GameObject.Find("PathPoints");
         }
 
-        pathChildren = Utils.getDirectChildren(path);
+        pathChildren = FindChildren.GetDirectChildren(path);
 
-        int i = 0;
-            StartCoroutine(moveBetweenPoints(i));
+        speed = GetComponent<EnemyData>().Speed;
+
+        if (speed == 0) Debug.LogError("Couldn't get speed from EnemyData"); 
     }
 
-    IEnumerator moveBetweenPoints(int i)
+    void totalAmountMoved(Vector3 oldPos, Vector3 newPos)
     {
-        transform.position = Vector3.MoveTowards(transform.position, pathChildren[i].transform.position, speed);
-        yield return new ();
-        if (transform.position != pathChildren[i].transform.position)
-        {
-            StartCoroutine(moveBetweenPoints(i));
+        totalDistanceMovedOverLine += Vector3.Distance(oldPos, newPos);
+    }
 
+    int i = 0;
+    Vector3 currentPos;
+    Vector3 newPostion;
+    private void FixedUpdate()
+    {
+        currentPos = transform.position;
+        newPostion = transform.position = Vector3.MoveTowards(transform.position, pathChildren[i].transform.position, speed);
+        totalAmountMoved(currentPos, newPostion);
+
+        if (transform.position == pathChildren[i].transform.position)
+        {
+            i++;
         }
+
         else if (i == pathChildren.Length - 1)
         {
             EnemyWaves.EnemyDestroyed("EndOfTrack", gameObject);
         }
-        else
-        {
-            i++;
-            StartCoroutine(moveBetweenPoints(i));
-        }      
     }
 }
