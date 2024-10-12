@@ -7,7 +7,6 @@ using Utils;
 public class PathGeneration : MonoBehaviour
 {
     GameObject[] pathPoints;
-    float totalPathLenght;
     void Start()
     {
         GameObject path = null;
@@ -17,13 +16,7 @@ public class PathGeneration : MonoBehaviour
         }
 
        pathPoints = FindChildren.GetDirectChildren(path);
-
-
-        for (int i = 0; i < pathPoints.Length-1; i++)
-        {
-            totalPathLenght += Vector3.Distance(pathPoints[i].transform.position, pathPoints[i +1].transform.position);
-        }
-
+        
 
     }
 
