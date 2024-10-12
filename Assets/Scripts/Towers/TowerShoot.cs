@@ -6,6 +6,9 @@ public class TowerShoot : MonoBehaviour
 {
     public static Action<GameObject, GameObject> orderChanged;
     float range = 0.5f;
+    float attackSpeed;
+    float bulletTravelSpeed = 0.5f; //tempvariable
+    EnemyData targetData;
     List<GameObject> inRange = new List<GameObject>();
 
     void Start()
@@ -24,34 +27,46 @@ public class TowerShoot : MonoBehaviour
     {
         for (int i = 0; i < EnemyWaves.Enemies.Count; i++)
         {
-            if (Vector3.Distance(EnemyWaves.Enemies[i].transform.position, transform.position) < range)
+            if (Vector3.Distance(EnemyWaves.Enemies[i].transform.position, transform.position) < range && !inRange.Contains(EnemyWaves.Enemies[i]))
             {
                 inRange.Add(EnemyWaves.Enemies[i]);
-            } 
+                pickTargetData();
+            }
         }
 
         for (int i = 0; i < inRange.Count; i++)
         {
             if (Vector3.Distance(inRange[i].transform.position, transform.position) > range)
             {
-                inRange[i] = null;  
+                inRange[i] = null;
             }
         }
         while (inRange.Contains(null))
         {
             inRange.RemoveAt(inRange.FindIndex(i => i == null));
-        }   
+        }
     }
     #endregion
-    
 
 
-    GameObject pickTarget()
+    void pickTargetData()
     {
-        return inRange[0]; 
+        targetData = inRange[0].GetComponent<EnemyData>();
     }
+    /// <summary>
+    /// Ty = Ta * Tx && Ey = Ea * Ex //denkstap
+    /// Ta * Tx = Ea * Ex && Ty = Ey //denkstap
+    /// Tx = 1 && Ex = 1 
+    ///     ///// Ty = EnemySpeed * Tx
+    /// 
+    /// </summary>
+    void calculateShootingLocation()
+    { 
+        float Tx, Ty, Ta, Ex, Ey, Ea;
 
-
+        Tx = Ey = targetData.Speed;
+        float tempVar = Tx * bulletTravelSpeed; //Ey = Ta * Tx + Ex 
+    }
 
 
     #region ActionDelegates
@@ -68,9 +83,10 @@ public class TowerShoot : MonoBehaviour
             {
                 inRange[i] = descendedObject;
                 inRange[i + 1] = ascendedObject;
-                
+                pickTargetData();
             }
         }
+
     }
 
     #endregion
