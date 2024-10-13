@@ -54,15 +54,15 @@ public class EnemyData : MonoBehaviour
         {
             
             case TypeEnemy.Normal:
-                Speed = 0.025f;
+                Speed = 0.25f;
                 health = 2;
                 break;
             case TypeEnemy.Big:
-                Speed = 0.010f;
+                Speed = 0.10f;
                 health = 4;
                 break;
             case TypeEnemy.Small:
-                Speed = 0.05f;
+                Speed = 0.5f;
                 health = 1;
                 break;
             default:

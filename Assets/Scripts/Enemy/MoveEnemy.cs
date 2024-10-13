@@ -25,7 +25,7 @@ public class MoveEnemy : MonoBehaviour
         pathChildren = FindChildren.GetDirectChildren(path);
 
         speed = GetComponent<EnemyData>().Speed;
-
+        print(speed);
         if (speed == 0) Debug.LogError("Couldn't get speed from EnemyData"); 
     }
 
@@ -39,18 +39,20 @@ public class MoveEnemy : MonoBehaviour
     Vector3 newPostion;
     private void FixedUpdate()
     {
-        currentPos = transform.position;
-        newPostion = transform.position = Vector3.MoveTowards(transform.position, pathChildren[i].transform.position, speed);
-        totalAmountMoved(currentPos, newPostion);
-
         if (transform.position == pathChildren[i].transform.position)
         {
             i++;
         }
 
-        else if (i == pathChildren.Length - 1)
+        else if (i == pathChildren.Length)
         {
             EnemyWaves.EnemyDestroyed("EndOfTrack", gameObject);
         }
+
+        currentPos = transform.position;
+        newPostion = transform.position = Vector3.MoveTowards(transform.position, pathChildren[i].transform.position, speed * Time.fixedDeltaTime);
+        totalAmountMoved(currentPos, newPostion);
+
+        
     }
 }

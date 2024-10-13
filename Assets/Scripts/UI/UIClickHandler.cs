@@ -41,7 +41,11 @@ public class UIClickHandler : MonoBehaviour
 
     public void NextWave()
     {
-        EnemyWaves.StartWave();
+        if (EnemyWaves.Enemies.Count == 0)
+        {
+            EnemyWaves.StartWave();
+        }
+        
     }
 
     public void LossState()
