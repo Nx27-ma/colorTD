@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 
@@ -10,9 +11,7 @@ public class EnemyData : MonoBehaviour
     public Color[] EnemyColorList { get; } = { new Color(0, 1, 0), new Color(1, 0.6f, 0), new Color(0.6f, 0, 1) };
     public TypeEnemy Type { get; private set; }
     public Color TargetColor { get; private set; } //the color of the enemy
-    public float RedColorHealth { get; private set; }    //the amount of color needed to mix the right color
-    public float YellowColorHealth { get; private set; }   //the amount of color needed to mix the right color
-    public float BlueColorHealth { get; private set; }
+    public Dictionary<string, float> HpValues = new Dictionary<string, float> { {"RedHp", 1f }, { "YellowHp", 1f }, { "BlueHp", 1f } };
     public float Speed { get; private set; }  //movementSpeed of the enemy
     SpriteRenderer border;
     SpriteRenderer inside;
@@ -20,6 +19,7 @@ public class EnemyData : MonoBehaviour
     Color currentColor;
     Color tempColor;
     float[] coloredHealth;
+    private int colorDevide;
 
     public enum TypeEnemy
     {
@@ -38,7 +38,6 @@ public class EnemyData : MonoBehaviour
 
     private void Start()
     {
-        coloredHealth = new float[3] {RedColorHealth, YellowColorHealth, BlueColorHealth};
         border = transform.Find("Border").GetComponent<SpriteRenderer>();
         inside = transform.Find("Inside").GetComponent<SpriteRenderer>();
 
@@ -71,26 +70,26 @@ public class EnemyData : MonoBehaviour
         }
         if (colorIndex == Colors.Green)
         {
-            YellowColorHealth = health;
-            BlueColorHealth = health;
+            HpValues["YellowHp"] = health;
+            HpValues["BlueHp"] = health;
         } else if (colorIndex == Colors.Purple)
         {
-            RedColorHealth = health;
-            BlueColorHealth = health;
+            HpValues["RedHp"] = health;
+            HpValues["BlueHp"] = health;
         } else if (colorIndex == Colors.Orange)
         {
-            YellowColorHealth = health;
-            RedColorHealth = health;
+            HpValues["YellowHp"] = health;
+            HpValues["RedHp"] = health;
         } else
         {
             print("NoColorIndexException");
         }
-        RedColorHealth = -1;
-        print($"{RedColorHealth}, {coloredHealth[0]} ");
+        colorDevide = 4;//helth;
+        
     }
     private void Update()
     {
-        if (RedColorHealth == 0 && YellowColorHealth == 0 && BlueColorHealth == 0)
+        if (HpValues["RedHp"] == 0 && HpValues["YellowHp"] == 0 && HpValues["BlueHp"] == 0)
         {
             EnemyWaves.EnemyDestroyed("Player", gameObject);
         }
@@ -108,10 +107,11 @@ public class EnemyData : MonoBehaviour
         }
     }
     public void TakeDamage(TowerColors color)
-    {
-
-        tempColor = TowerColorList[(int)color];
-        currentColor = Color.Lerp(currentColor, tempColor, 1);
+    { 
+        HpValues[HpValues.ElementAt((int)color).Key] -= 1;
+        float flippedValue = colorDevide - HpValues[HpValues.ElementAt((int)color).Key];
+        Color colorMultiplier = (TowerColorList[(int)color] / colorDevide) * flippedValue;
+        currentColor = Color.Lerp(colorMultiplier, currentColor, 1);
         inside.color = currentColor;
     }
 }
