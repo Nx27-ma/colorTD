@@ -39,20 +39,23 @@ public class MoveEnemy : MonoBehaviour
     Vector3 newPostion;
     private void FixedUpdate()
     {
-        if (transform.position == pathChildren[i].transform.position)
+        
+
+        if (i == pathChildren.Length)
+        {
+            EnemyWaves.EnemyDestroyed("EndOfTrack", gameObject); 
+        }
+        else if (transform.position == pathChildren[i].transform.position)
         {
             i++;
         }
 
-        else if (i == pathChildren.Length)
+        if (i < pathChildren.Length)
         {
-            EnemyWaves.EnemyDestroyed("EndOfTrack", gameObject);
+            currentPos = transform.position;
+            newPostion = transform.position = Vector3.MoveTowards(transform.position, pathChildren[i].transform.position, speed * Time.fixedDeltaTime);
+            totalAmountMoved(currentPos, newPostion);
         }
-
-        currentPos = transform.position;
-        newPostion = transform.position = Vector3.MoveTowards(transform.position, pathChildren[i].transform.position, speed * Time.fixedDeltaTime);
-        totalAmountMoved(currentPos, newPostion);
-
         
     }
 }

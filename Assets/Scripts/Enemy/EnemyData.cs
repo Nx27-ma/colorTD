@@ -20,7 +20,7 @@ public class EnemyData : MonoBehaviour
     Color tempColor;
     float[] coloredHealth;
     private int colorDevide;
-
+    private int TEMPORARYINTFORDEBUG = 10;
     public enum TypeEnemy
     {
         Normal, Big, Small
@@ -53,15 +53,15 @@ public class EnemyData : MonoBehaviour
         {
             
             case TypeEnemy.Normal:
-                Speed = 0.25f;
+                Speed = 2f * TEMPORARYINTFORDEBUG;
                 health = 2;
                 break;
             case TypeEnemy.Big:
-                Speed = 0.10f;
+                Speed = 1f * TEMPORARYINTFORDEBUG;
                 health = 4;
                 break;
             case TypeEnemy.Small:
-                Speed = 0.5f;
+                Speed = 3f * TEMPORARYINTFORDEBUG;
                 health = 1;
                 break;
             default:

@@ -35,11 +35,15 @@ public class EnemyWaves : MonoBehaviour
 
             for (int i = 0; i < waveWeight; i++)
             {
-                Enemies.Add(Instantiate(generalEnemy));
+                Invoke("createEnemy", i);
             }
         }
     }
     
+    void createEnemy()
+    {
+        Enemies.Add(Instantiate(generalEnemy));
+    }
 
     void fixOrder()
     {
