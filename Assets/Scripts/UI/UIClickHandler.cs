@@ -8,7 +8,6 @@ public class UIClickHandler : MonoBehaviour
 
     GameObject canvas;
     GameObject[] panels;
-    Button[] buttons;
     public GameObject SelectedGameObject;
     public TowerPlace towerPlace;
     void Start()
