@@ -9,7 +9,8 @@ public class EnemyWaves : MonoBehaviour
     public static Action StartWave;
 
 
-    int waveNumber = 0;
+    public int WaveNumber { get; private set; } = 0;
+
     int waveWeight;
     GameObject generalEnemy;
 
@@ -29,8 +30,8 @@ public class EnemyWaves : MonoBehaviour
     {
         if (Enemies.Count == 0)
         {
-            waveNumber++;
-            waveWeight = (int)(waveNumber * 1.5f);
+            WaveNumber++;
+            waveWeight = (int)(WaveNumber * 1.5f);
 
             for (int i = 0; i < waveWeight; i++)
             {
