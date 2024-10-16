@@ -43,7 +43,9 @@ public class MoveEnemy : MonoBehaviour
 
         if (i == pathChildren.Length)
         {
-            EnemyWaves.EnemyDestroyed("EndOfTrack", gameObject); 
+
+            Debug.Log("gameobject" + gameObject.name);
+            EnemyWaves.EnemyDestroyed?.Invoke("EndOfTrack", gameObject); 
         }
         else if (transform.position == pathChildren[i].transform.position)
         {

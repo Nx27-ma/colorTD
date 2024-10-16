@@ -180,7 +180,6 @@ GameObject:
   m_Component:
   - component: {fileID: 980597039546678919}
   - component: {fileID: 8231602351594934148}
-  - component: {fileID: 2937265171588985007}
   - component: {fileID: 8305682594408334453}
   m_Layer: 0
   m_Name: NormalEnemy
@@ -216,18 +215,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 55141ffefa5a3b546bdd6c72a2af1060, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &2937265171588985007
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6944288681204248439}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ab65dd2ba94be3143981da6a14d17ab0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &8305682594408334453

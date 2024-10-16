@@ -13,11 +13,10 @@ public class EnemyWaves : MonoBehaviour
     int waveWeight;
     GameObject generalEnemy;
 
-
     void Start()
     {
         StartWave = generateWave;
-        EnemyDestroyed = killEnemy;
+        EnemyDestroyed += killEnemy;
         generalEnemy = Resources.Load("Prefabs/Enemies/NormalEnemy") as GameObject;
     }
 
@@ -42,7 +41,11 @@ public class EnemyWaves : MonoBehaviour
     
     void createEnemy()
     {
-        Enemies.Add(Instantiate(generalEnemy));
+        print(generalEnemy);
+
+        GameObject newEnemy = Instantiate(generalEnemy);
+        Enemies.Add(newEnemy);
+       
     }
 
     void fixOrder()
@@ -66,7 +69,7 @@ public class EnemyWaves : MonoBehaviour
             //UIPlayerLoseHP
         }
 
-        Enemies.RemoveAt(Enemies.FindIndex(e => e == target));
+        Enemies.Remove(target);
 
         Destroy(target);
     }

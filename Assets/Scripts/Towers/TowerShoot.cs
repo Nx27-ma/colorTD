@@ -30,7 +30,7 @@ public class TowerShoot : MonoBehaviour
             if (Vector3.Distance(EnemyWaves.Enemies[i].transform.position, transform.position) < range && !inRange.Contains(EnemyWaves.Enemies[i]))
             {
                 inRange.Add(EnemyWaves.Enemies[i]);
-                pickTargetData();
+               // pickTargetData();
             }
         }
 
@@ -43,30 +43,36 @@ public class TowerShoot : MonoBehaviour
         }
         while (inRange.Contains(null))
         {
-            inRange.RemoveAt(inRange.FindIndex(i => i == null));
+            inRange.Remove(null);
         }
     }
     #endregion
 
-
-    void pickTargetData()
+    void basicShoot()
     {
-        targetData = inRange[0].GetComponent<EnemyData>();
-    }
-    /// <summary>
-    /// Ty = Ta * Tx && Ey = Ea * Ex //denkstap
-    /// Ta * Tx = Ea * Ex && Ty = Ey //denkstap
-    /// Tx = 1 && Ex = 1 
-    ///     ///// Ty = EnemySpeed * Tx
-    /// 
-    /// </summary>
-    void calculateShootingLocation()
-    { 
-        float Tx, Ty, Ta, Ex, Ey, Ea;
 
-        Tx = Ey = targetData.Speed;
-        float tempVar = Tx * bulletTravelSpeed; //Ey = Ta * Tx + Ex 
     }
+
+
+
+    //void pickTargetData()
+    //{
+    //    targetData = inRange[0].GetComponent<EnemyData>();
+    //}
+    ///// <summary>
+    ///// Ty = Ta * Tx && Ey = Ea * Ex //denkstap
+    ///// Ta * Tx = Ea * Ex && Ty = Ey //denkstap
+    ///// Tx = 1 && Ex = 1 
+    /////     ///// Ty = EnemySpeed * Tx
+    ///// 
+    ///// </summary>
+    //void calculateShootingLocation()
+    //{ 
+    //    float Tx, Ty, Ta, Ex, Ey, Ea;
+
+    //    Tx = Ey = targetData.Speed;
+    //    float tempVar = Tx * bulletTravelSpeed; //Ey = Ta * Tx + Ex 
+    //}
 
 
     #region ActionDelegates
@@ -83,7 +89,7 @@ public class TowerShoot : MonoBehaviour
             {
                 inRange[i] = descendedObject;
                 inRange[i + 1] = ascendedObject;
-                pickTargetData();
+                //pickTargetData();
             }
         }
 
