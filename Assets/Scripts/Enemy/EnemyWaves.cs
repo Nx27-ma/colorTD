@@ -41,8 +41,6 @@ public class EnemyWaves : MonoBehaviour
     
     void createEnemy()
     {
-        print(generalEnemy);
-
         GameObject newEnemy = Instantiate(generalEnemy);
         Enemies.Add(newEnemy);
        

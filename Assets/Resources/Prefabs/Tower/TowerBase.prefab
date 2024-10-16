@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3540282427547012783}
   - component: {fileID: 6776237229795904883}
-  - component: {fileID: 8898651444926589478}
+  - component: {fileID: 7980700575843742494}
   m_Layer: 0
   m_Name: TowerBase
   m_TagString: Untagged
@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2436e3dcb9e7edd429e4532aa3547e53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &8898651444926589478
+--- !u!114 &7980700575843742494
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -55,7 +55,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1385619190162202227}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 95ae816bc1f70844a8edab0097192d18, type: 3}
+  m_Script: {fileID: 11500000, guid: e6e59f7dcbfb17a48b6726dd943c0804, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &4542596650246196124
