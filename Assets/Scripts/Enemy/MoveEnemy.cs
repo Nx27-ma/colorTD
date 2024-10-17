@@ -39,13 +39,11 @@ public class MoveEnemy : MonoBehaviour
     Vector3 newPostion;
     private void FixedUpdate()
     {
-        
+
 
         if (i == pathChildren.Length)
         {
-
-            Debug.Log("gameobject" + gameObject.name);
-            EnemyWaves.EnemyDestroyed?.Invoke("EndOfTrack", gameObject); 
+            EnemyWaves.EnemyDestroyed("EndOfTrack", gameObject);
         }
         else if (transform.position == pathChildren[i].transform.position)
         {
@@ -58,6 +56,6 @@ public class MoveEnemy : MonoBehaviour
             newPostion = transform.position = Vector3.MoveTowards(transform.position, pathChildren[i].transform.position, speed * Time.fixedDeltaTime);
             totalAmountMoved(currentPos, newPostion);
         }
-        
+
     }
 }

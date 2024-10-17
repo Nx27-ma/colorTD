@@ -11,7 +11,7 @@ public class EnemyData : MonoBehaviour
     public Color[] EnemyColorList { get; } = { new Color(0, 1, 0), new Color(1, 0.6f, 0), new Color(0.6f, 0, 1) };
     public TypeEnemy Type { get; private set; }
     public Color TargetColor { get; private set; } //the color of the enemy
-    public Dictionary<string, float> HpValues = new Dictionary<string, float> { {"RedHp", 1f }, { "YellowHp", 1f }, { "BlueHp", 1f } };
+    public List<int> HpValues = new List<int> {  0 , 0 , 0 };
     public float Speed { get; private set; }  //movementSpeed of the enemy
     SpriteRenderer border;
     SpriteRenderer inside;
@@ -20,7 +20,7 @@ public class EnemyData : MonoBehaviour
     Color tempColor;
     float[] coloredHealth;
     private int colorDevide;
-    private int TEMPORARYINTFORDEBUG = 10;
+    private int TEMPORARYINTFORDEBUG = 1;
     public enum TypeEnemy
     {
         Normal, Big, Small
@@ -48,6 +48,7 @@ public class EnemyData : MonoBehaviour
         border.color = TargetColor;
 
         Type = (TypeEnemy)UnityEngine.Random.Range(0, 3);
+        Type = TypeEnemy.Normal;
         int health = 0;
         switch (Type)
         {
@@ -68,50 +69,53 @@ public class EnemyData : MonoBehaviour
                 Debug.LogError($"invalid enemyType:{Type}");
                 break;
         }
-        if (colorIndex == Colors.Green)
-        {
-            HpValues["YellowHp"] = health;
-            HpValues["BlueHp"] = health;
-        } else if (colorIndex == Colors.Purple)
-        {
-            HpValues["RedHp"] = health;
-            HpValues["BlueHp"] = health;
-        } else if (colorIndex == Colors.Orange)
-        {
-            HpValues["YellowHp"] = health;
-            HpValues["RedHp"] = health;
-        } else
-        {
-            print("NoColorIndexException");
-        }
-        colorDevide = 4;//helth;
+        HpValues[2] = health;
+        //if (colorIndex == Colors.Green)
+        //{
+        //    HpValues[(int)TowerColors.Yellow] = health;
+        //    HpValues[(int)TowerColors.Blue] = health;
+        //} else if (colorIndex == Colors.Purple)
+        //{
+        //    HpValues[(int)TowerColors.Red] = health;
+        //    HpValues[(int)TowerColors.Blue] = health;
+        //} else if (colorIndex == Colors.Orange)
+        //{
+        //    HpValues[(int)TowerColors.Yellow] = health;
+        //    HpValues[(int)TowerColors.Red] = health;
+        //} else
+        //{
+        //    print("NoColorIndexException");
+        //}
+        //colorDevide = 4;//helth;
         
     }
     private void Update()
     {
-        if (HpValues["RedHp"] == 0 && HpValues["YellowHp"] == 0 && HpValues["BlueHp"] == 0)
+        if (/*HpValues[(int)TowerColors.Red] == 0 && HpValues[(int)TowerColors.Yellow] == 0 &&*/ HpValues[(int)TowerColors.Blue] == 0)
         {
             EnemyWaves.EnemyDestroyed("Player", gameObject);
         }
 
-        if (Input.GetMouseButtonDown(0))
-        {
-            print("pressed");
-            TakeDamage(TowerColors.Yellow);  
-        }
+        //if (Input.GetMouseButtonDown(0))
+        //{
+        //    print("pressed");
+        //    TakeDamage(TowerColors.Yellow);  
+        //}
 
-        if (Input.GetMouseButtonDown(1)) 
-        {
-            print("pressed");
-            TakeDamage(TowerColors.Red);
-        }
+        //if (Input.GetMouseButtonDown(1)) 
+        //{
+        //    print("pressed");
+        //    TakeDamage(TowerColors.Red);
+        //}
     }
     public void TakeDamage(TowerColors color)
     { 
-        HpValues[HpValues.ElementAt((int)color).Key] -= 1;
-        float flippedValue = colorDevide - HpValues[HpValues.ElementAt((int)color).Key];
-        Color colorMultiplier = (TowerColorList[(int)color] / colorDevide) * flippedValue;
-        currentColor = Color.Lerp(colorMultiplier, currentColor, 1);
-        inside.color = currentColor;
+        HpValues[(int)color] -= 1;
+        print(HpValues[(int)color]);
+        //HpValues[HpValues.ElementAt((int)color).Key] -= 1;
+        //float flippedValue = colorDevide - HpValues[HpValues.ElementAt((int)color).Key];
+        //Color colorMultiplier = (TowerColorList[(int)color] / colorDevide) * flippedValue;
+        //currentColor = Color.Lerp(colorMultiplier, currentColor, 1);
+        //inside.color = currentColor;
     }
 }

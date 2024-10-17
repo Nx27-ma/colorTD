@@ -8,13 +8,15 @@ public class EnemyWaves : MonoBehaviour
     public static Action<string, GameObject> EnemyDestroyed;
     public static Action StartWave;
 
+    public int WaveNumber { get; private set; } = 0;
 
-    int waveNumber = 0;
     int waveWeight;
+    [SerializeField] GameObject pathPoint;
     GameObject generalEnemy;
-
+    PlayerData playerData;
     void Start()
     {
+        playerData = GameObject.Find("DEFAULT").GetComponent<PlayerData>();
         StartWave = generateWave;
         EnemyDestroyed += killEnemy;
         generalEnemy = Resources.Load("Prefabs/Enemies/NormalEnemy") as GameObject;
@@ -29,8 +31,8 @@ public class EnemyWaves : MonoBehaviour
     {
         if (Enemies.Count == 0)
         {
-            waveNumber++;
-            waveWeight = (int)(waveNumber * 1.5f);
+            WaveNumber++;
+            waveWeight = (int)(WaveNumber * 1.5f);
 
             for (int i = 0; i < waveWeight; i++)
             {
@@ -41,9 +43,7 @@ public class EnemyWaves : MonoBehaviour
     
     void createEnemy()
     {
-        print(generalEnemy);
-
-        GameObject newEnemy = Instantiate(generalEnemy);
+        GameObject newEnemy = Instantiate(generalEnemy, pathPoint.transform.position, new Quaternion(pathPoint.transform.eulerAngles.x, pathPoint.transform.eulerAngles.y, pathPoint.transform.eulerAngles.z, 1));
         Enemies.Add(newEnemy);
        
     }
@@ -66,7 +66,7 @@ public class EnemyWaves : MonoBehaviour
         } 
         else if (causeOfDeath == "EndOfTrack")
         {
-            //UIPlayerLoseHP
+            playerData.DeminishLives();
         }
 
         Enemies.Remove(target);
