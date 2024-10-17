@@ -7,7 +7,7 @@ public class UIClickHandler : MonoBehaviour
     //Set all panels on inactive except main
 
     GameObject canvas;
-    GameObject[] panels;
+    [SerializeField] GameObject[] panels;
     public GameObject SelectedGameObject;
     public TowerPlace towerPlace;
     void Start()
@@ -43,15 +43,11 @@ public class UIClickHandler : MonoBehaviour
         
     }
 
-    public void LossState()
+    public void EndState()
     {
         panels[(int)PanelType.main].SetActive(true);
+        panels[(int)(PanelType.tower)].SetActive(false);
         panels[(int)PanelType.lost].SetActive(false);
-    }
-
-    public void VictoryState()
-    {
-        panels[(int)PanelType.main].SetActive(true);
         panels[(int)PanelType.won].SetActive(false);
     }
 

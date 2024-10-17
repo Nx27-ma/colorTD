@@ -48,7 +48,7 @@ public class EnemyData : MonoBehaviour
         border.color = TargetColor;
 
         Type = (TypeEnemy)UnityEngine.Random.Range(0, 3);
-        Type = TypeEnemy.Normal;
+        
         int health = 0;
         switch (Type)
         {
@@ -91,7 +91,7 @@ public class EnemyData : MonoBehaviour
     }
     private void Update()
     {
-        if (/*HpValues[(int)TowerColors.Red] == 0 && HpValues[(int)TowerColors.Yellow] == 0 &&*/ HpValues[(int)TowerColors.Blue] == 0)
+        if (/*HpValues[(int)TowerColors.Red] == 0 && HpValues[(int)TowerColors.Yellow] == 0 &&*/ HpValues[(int)TowerColors.Blue] <= 0)
         {
             EnemyWaves.EnemyDestroyed("Player", gameObject);
         }

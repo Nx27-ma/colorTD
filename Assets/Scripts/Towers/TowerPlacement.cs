@@ -27,6 +27,15 @@ public class TowerPlace : MonoBehaviour
         clickedState = true;
     }
 
+    public void removeAllTowers()
+    {
+        foreach (GameObject obj in towers)
+        {
+            Destroy(obj);
+        }
+        towers.Clear();
+    }
+
     void Update()
     {
         cursorPos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 1));

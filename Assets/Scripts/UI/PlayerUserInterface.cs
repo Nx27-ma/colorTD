@@ -8,24 +8,28 @@ using Utils;
 
 public class PlayerUserInterface : MonoBehaviour
 {
-    GameObject lost, won, towerPanel;
-    TMP_Text money ,lives;
+    [SerializeField] GameObject lost, won, towerPanel;
+    TMP_Text wave, lives;
+    PlayerData playerData;
+    EnemyWaves enemyWaves;
     void Start()
     {
-        GameObject moneyTemp = GameObject.Find("Money");
+        enemyWaves = GameObject.Find("DEFAULT").GetComponent<EnemyWaves>();
+        playerData = GameObject.Find("DEFAULT").GetComponent<PlayerData>();
+        GameObject wavesTemp = GameObject.Find("Waves");
         GameObject livesTemp = GameObject.Find("Lives");
-        money = moneyTemp.gameObject.GetComponent<TMP_Text>();
+        wave = wavesTemp.gameObject.GetComponent<TMP_Text>();
         lives = livesTemp.gameObject.GetComponent<TMP_Text>();
         towerPanel = GameObject.Find("PanelPlacement");
-        lost =  GameObject.Find("PanelLost");
-        won = GameObject.Find("PanelWon");
+        //lost =  GameObject.Find("PanelLost");
+        //won = GameObject.Find("PanelWon");
     }
 
     // Update is called once per frame
     void Update()
     {
-        money.text = "Lives: 5";
-        lives.text = "Lives: 5";
+        wave.text = $"Waves: {enemyWaves.WaveNumber} / {enemyWaves.MaxWave}";
+        lives.text = $"Lives: {playerData.Lives}";
     }
 
     public void DefeatScreen()

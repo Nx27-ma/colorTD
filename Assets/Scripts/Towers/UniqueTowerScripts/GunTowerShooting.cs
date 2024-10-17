@@ -16,12 +16,12 @@ public class GunTowerShooting : A_TowerShoot
     void Update()
     {
         //if (EnemyWaves.Enemies.Count > 0) { print(EnemyWaves.Enemies[0]); }
-        
 
+        checkRange();
         time += Time.deltaTime;
         if (time > attackSpeed)
         {
-            checkRange();
+            
             targetData.TakeDamage(EnemyData.TowerColors.Blue);
             time = 0;
             print("tookdmg");

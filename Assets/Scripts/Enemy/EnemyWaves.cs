@@ -8,8 +8,9 @@ public class EnemyWaves : MonoBehaviour
     public static Action<string, GameObject> EnemyDestroyed;
     public static Action StartWave;
 
-    public int WaveNumber { get; private set; } = 0;
-
+    public int WaveNumber { get; set; } = 0;
+    public int MaxWave { get; set; } = 10;
+    private int enemiesKilled;
     int waveWeight;
     [SerializeField] GameObject pathPoint;
     GameObject generalEnemy;
@@ -29,6 +30,7 @@ public class EnemyWaves : MonoBehaviour
 
     void generateWave()
     {
+        enemiesKilled = 0;
         if (Enemies.Count == 0)
         {
             WaveNumber++;
@@ -48,18 +50,10 @@ public class EnemyWaves : MonoBehaviour
        
     }
 
-    void fixOrder()
-    {
-        GameObject tempAscended;
-        GameObject tempDescended;
-
-
-       // TowerShoot.orderChanged(tempAscended, tempDescended);
-    }
-
     void killEnemy(string causeOfDeath, GameObject target)
     {
-        print("Whoops delegate called!");
+
+
         if(causeOfDeath == "Player")
         {
             //EconomyAction
@@ -72,6 +66,15 @@ public class EnemyWaves : MonoBehaviour
         Enemies.Remove(target);
 
         Destroy(target);
+        enemiesKilled++;
+        if (WaveNumber == MaxWave && Enemies.Count == 0 && waveWeight == enemiesKilled)
+        {
+           
+            playerData.WonGame();
+        } else if(Enemies.Count == 0 && WaveNumber < MaxWave)
+        {
+            Invoke("generateWave", 2);
+        }
     }
 
 

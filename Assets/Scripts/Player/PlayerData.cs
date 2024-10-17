@@ -5,8 +5,10 @@ using UnityEngine;
 public class PlayerData : MonoBehaviour
 {
     public int Lives { get; private set; } = 5;
-    PlayerUserInterface player;
+    PlayerUserInterface playerUserInterface;
     EnemyWaves enemyWaves;
+    private TowerPlace towerPlace;
+    [SerializeField] GameObject panelPlacement;
     public void DeminishLives()
     {
         Lives--;
@@ -14,19 +16,34 @@ public class PlayerData : MonoBehaviour
     void Start()
     {
         GameObject defaultObj = GameObject.Find("DEFAULT");
-        player = defaultObj.GetComponent<PlayerUserInterface>();
-       enemyWaves = defaultObj.GetComponent<EnemyWaves>();
+        playerUserInterface = panelPlacement.GetComponent<PlayerUserInterface>();
+        enemyWaves = defaultObj.GetComponent<EnemyWaves>();
+        towerPlace = defaultObj.GetComponent<TowerPlace>();
     }
 
     void Update()
     {
+
         if (Lives <= 0)
         {
-            player.DefeatScreen();
+            playerUserInterface.DefeatScreen();
+            Lives = 5;
+            enemyWaves.WaveNumber = 0;
+            towerPlace.removeAllTowers();
         }
-        if (enemyWaves.WaveNumber > 10)
+        
+
+    }
+
+    public void WonGame()
+    {
+        if (enemyWaves.WaveNumber == enemyWaves.MaxWave)
         {
-            player.VictoryScreen();
+            playerUserInterface.VictoryScreen();
+            Lives = 5;
+            enemyWaves.WaveNumber = 0;
+            towerPlace.removeAllTowers();
         }
+
     }
 }
