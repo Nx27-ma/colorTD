@@ -10,15 +10,11 @@ public class PlayerInterface : MonoBehaviour
 {
     GameObject canvas;
     GameObject[] displayFields;
-    TMP_Text money;
-    TMP_Text lives;
     void Start()
     {
         canvas = GameObject.FindGameObjectWithTag("Canvas");
         string[] names = { "Money", "Lives" };
         displayFields = FindChildren.GetChildrenByName(names, canvas);
-        money = displayFields[0].GetComponent<TMP_Text>();
-        lives = displayFields[1].GetComponent<TMP_Text>();
         
     }
 

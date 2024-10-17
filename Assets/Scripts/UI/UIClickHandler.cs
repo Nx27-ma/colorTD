@@ -13,6 +13,8 @@ public class UIClickHandler : MonoBehaviour
     void Start()
     {
         towerPlace = gameObject.GetComponent<TowerPlace>();
+        
+        panels = FindChildren.GetDirectChildren(canvas);
     }
 
     public void MainScreenPanelButtons(string name)
