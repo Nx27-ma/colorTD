@@ -30,6 +30,11 @@ public class PlayerData : MonoBehaviour
             Lives = 5;
             enemyWaves.WaveNumber = 0;
             towerPlace.removeAllTowers();
+            foreach (GameObject enemy in EnemyWaves.Enemies)
+            {
+                Destroy(enemy);
+            }
+            EnemyWaves.Enemies.Clear();
         }
         
 
