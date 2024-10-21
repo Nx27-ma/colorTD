@@ -9,7 +9,7 @@ public class UIClickHandler : MonoBehaviour
     GameObject canvas;
     [SerializeField] GameObject[] panels;
     public GameObject SelectedGameObject;
-    public TowerPlace towerPlace;
+    private TowerPlace towerPlace;
     void Start()
     {
         towerPlace = gameObject.GetComponent<TowerPlace>();

@@ -6,10 +6,8 @@ using UnityEngine.Animations;
 
 public class GunTowerShooting : A_TowerShoot
 {
-    private Animator animator;
     void Start()
     {
-        animator = gameObject.transform.GetChild(0).GetComponent<Animator>();
         attackSpeed = 1f;
         range = 3f;
         orderChanged = inRangeOrderCorrection;
@@ -24,8 +22,8 @@ public class GunTowerShooting : A_TowerShoot
         checkRange();
         time += Time.deltaTime;
         if (time > attackSpeed && targetData != null)
-        {        
-            targetData.TakeDamage(EnemyData.TowerColors.Blue);
+        {
+            shoot();
             time = 0;
             print("tookdmg");
         }

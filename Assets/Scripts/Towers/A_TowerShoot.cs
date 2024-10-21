@@ -5,7 +5,7 @@ using UnityEngine;
 
 public abstract class A_TowerShoot : MonoBehaviour
 {
-    public static Action<GameObject, GameObject> orderChanged;
+    protected static Action<GameObject, GameObject> orderChanged;
     protected float range = 0.5f;
     protected float attackSpeed = 0.5f;
     protected float bulletTravelSpeed = 0.5f;
@@ -13,6 +13,7 @@ public abstract class A_TowerShoot : MonoBehaviour
     protected List<GameObject> inRange = new();
     protected List<GameObject> deleteList = new();
     protected float time = 0;
+    protected Animator animator;
 
     #region RangeChecking
     protected void checkRange()
@@ -59,9 +60,11 @@ public abstract class A_TowerShoot : MonoBehaviour
 
     #endregion
 
-    void shoot()
+    protected void shoot()
     {
-        targetData.TakeDamage(EnemyData.TowerColors.Red);
+        targetData.TakeDamage(EnemyData.TowerColors.Blue);
+        lookAt2d();
+        triggerAnim();
     }
 
     #region ActionDelegates
@@ -88,5 +91,22 @@ public abstract class A_TowerShoot : MonoBehaviour
 
     }
 
+    #endregion
+
+    #region Anim
+    void triggerAnim()
+    {
+        if (animator == null)
+        {
+            animator = transform.GetChild(0).GetComponent<Animator>();
+        }
+        animator.Play("Shoot");
+    }
+
+    void lookAt2d()
+    {
+       transform.rotation =  Quaternion.LookRotation(Vector3.forward, targetData.gameObject.transform.position - transform.position);
+    }
+    
     #endregion
 }

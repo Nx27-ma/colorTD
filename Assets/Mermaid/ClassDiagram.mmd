@@ -1,0 +1,53 @@
+
+classDiagram 
+
+	EnemyData --> MoveEnemy
+	EnemyData --> A_TowerShoot
+	EnemyWaves --> PlayerData
+	EnemyWaves --> A_TowerShoot
+	EnemyWaves --> UIclickHandler
+	PlayerData --> PlayerUserInterface
+	PlayerData --> EnemyWaves
+	A_TowerShoot --|> GunTowerShooting
+
+
+
+
+	class EnemyData{
+		-float Speed
+		-enum TowerColors
+		-TakeDamage()
+	}
+
+	class EnemyWaves{
+		-static List<GameObject> Enemies
+		-static Action<string, GameObject> EnemyDestroyed
+		-static Action StartWave
+	}
+
+	class MoveEnemy{
+		-float totalDistanceMovedOverLine
+	}
+
+	class PlayerData{
+		-int Lives
+		-DeminishLives()
+		-WonGame()
+	}
+
+	class GunTowerShooting{
+
+	}
+
+	class A_TowerShoot{
+		-static Action<GameObject, GameObject> orderChanged
+	}
+
+	class UIclickHandler{
+		public TowerPlace towerPlace
+	}
+
+	class PlayerUserInterface{
+
+	}
+``` 

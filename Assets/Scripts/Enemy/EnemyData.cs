@@ -7,12 +7,12 @@ using UnityEngine;
 
 public class EnemyData : MonoBehaviour
 {
-    public Color[] TowerColorList { get; } = { new Color(1, 0, 0), new Color(1, 1, 0), new Color(0, 0, 1) };
-    public Color[] EnemyColorList { get; } = { new Color(0, 1, 0), new Color(1, 0.6f, 0), new Color(0.6f, 0, 1) };
-    public TypeEnemy Type { get; private set; }
-    public Color TargetColor { get; private set; } //the color of the enemy
-    public List<int> HpValues = new List<int> {  0 , 0 , 0 };
     public float Speed { get; private set; }  //movementSpeed of the enemy
+    Color[] TowerColorList { get; } = { new Color(1, 0, 0), new Color(1, 1, 0), new Color(0, 0, 1) };
+    Color[] EnemyColorList { get; } = { new Color(0, 1, 0), new Color(1, 0.6f, 0), new Color(0.6f, 0, 1) };
+    TypeEnemy Type;
+    Color TargetColor; //the color of the enemy
+    List<int> HpValues = new List<int> {  0 , 0 , 0 };
     SpriteRenderer border;
     SpriteRenderer inside;
     float healthRemoveAmount;
@@ -21,21 +21,20 @@ public class EnemyData : MonoBehaviour
     float[] coloredHealth;
     private int colorDevide;
     private int TEMPORARYINTFORDEBUG = 1;
-    public enum TypeEnemy
+    enum TypeEnemy
     {
         Normal, Big, Small
     }
 
-    public enum Colors  //for the color array
+     enum Colors  //for the color array
     {
         Green, Purple, Orange
     }
-
-    public enum TowerColors  //for the color array
+     
+    public enum TowerColors
     {
         Red, Yellow, Blue
     }
-
     private void Start()
     {
         border = transform.Find("Border").GetComponent<SpriteRenderer>();
