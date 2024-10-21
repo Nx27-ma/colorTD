@@ -12,7 +12,7 @@ public class EnemyWaves : MonoBehaviour
     public int MaxWave { get; set; } = 10;
     private int enemiesKilled;
     int waveWeight;
-    [SerializeField] GameObject pathPoint;
+    [SerializeField] GameObject pathPoint, towerPlacePanel;
     GameObject generalEnemy;
     PlayerData playerData;
     void Start()
@@ -31,7 +31,7 @@ public class EnemyWaves : MonoBehaviour
     void generateWave()
     {
         enemiesKilled = 0;
-        if (Enemies.Count == 0)
+        if (Enemies.Count == 0 && towerPlacePanel.activeInHierarchy == true)
         {
             WaveNumber++;
             waveWeight = (int)(WaveNumber * 1.5f);
