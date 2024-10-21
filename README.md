@@ -1,16 +1,18 @@
 # colorTD
 
-1:
-
 This is the ColorTD mainscreen
 ![](https://github.com/Nx27-ma/colorTD/blob/master/GitPictures/MainScreenTowerDefense.png)
 
 You shoot the enemies or you dont and you die
 ![](https://github.com/Nx27-ma/colorTD/blob/master/GitPictures/GameBase.png)
 
+1: 
+
+
+
 2:
 
-Here's the root ![Develop](https://github.com/Nx27-ma/colorTD/tree/Build1/Assets branch)
+Here's the root ![Develop](https://github.com/Nx27-ma/colorTD/tree/Build1/Assets )branch
 
 3: 
 
@@ -37,7 +39,7 @@ Here some gameplay
 
 9:
 
-![Scedule](https://trello.com/b/bnFHbXcf/colortd)
+![Schedule](https://trello.com/b/bnFHbXcf/colortd)
 
 10: 
 
