@@ -30,7 +30,7 @@ There arent any design choices made yet i just wanted a working prototype first
 
 7:
 
-![](https://github.com/Nx27-ma/colorTD/blob/master/GitPictures/Whiteboard%204.png)
+![](https://github.com/Nx27-ma/colorTD/blob/master/GitPictures/ClassDiagram.png)
 
 8:
 
