@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Enemy;
 public class GameState : MonoBehaviour
 {
     public List<GameObject> Enemies;
@@ -9,7 +8,7 @@ public class GameState : MonoBehaviour
 
     void Start()
     {
-        EnemyState.EndReached += EndReached;
+        EnemyTrackData.EndReached += EndReached;
     }
 
     void Update()

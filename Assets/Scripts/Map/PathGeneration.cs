@@ -1,9 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.IO;
 using UnityEngine;
-using UnityEngine.UI;
-using Utils;
+using UnityEngine.Rendering;
+
 
 [RequireComponent(typeof(LineRenderer), typeof(MeshCollider))]
 
@@ -13,6 +10,7 @@ public class PathGeneration : MonoBehaviour
     MeshCollider MeshCollider;
     LineRenderer LineRenderer;
     float DrawCooldown = 0.01f, DrawCooldownTimer;
+    float PointDistance;
     void Start()
     {
         LineRenderer = GetComponent<LineRenderer>();
@@ -25,22 +23,26 @@ public class PathGeneration : MonoBehaviour
     void Update()
     {
         DrawCooldownTimer -= Time.deltaTime;
-        if (Input.GetMouseButton(0) && DrawCooldownTimer <= 0)
+        if (LineRenderer.positionCount <= 0)
         {
-            DrawCooldownTimer = DrawCooldown;
-            LineRenderer.positionCount++;
-            Vector3 CusrorWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            if (Input.GetMouseButton(0) && DrawCooldownTimer <= 0
+            && Vector3.Distance(LineRenderer.GetPosition(LineRenderer.positionCount - 1), LineRenderer.GetPosition(LineRenderer.positionCount)) < PointDistance)
+            {
+                DrawCooldownTimer = DrawCooldown;
+                Vector3 CusrorWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                LineRenderer.positionCount++;
+                CusrorWorldPos.z = 0;
+                LineRenderer.SetPosition(LineRenderer.positionCount - 1, CusrorWorldPos);
+                LineRenderer.BakeMesh(Mesh, false);
+                MeshCollider.sharedMesh = Mesh;
 
-            CusrorWorldPos.z = 0;
-            LineRenderer.SetPosition(LineRenderer.positionCount -1, CusrorWorldPos);
-
-            LineRenderer.BakeMesh(Mesh, true);
-            MeshCollider.sharedMesh = Mesh;
+            }
         }
+        
     }
 }
 
-   
+
 
 
 
