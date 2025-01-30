@@ -1,26 +1,21 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Net;
 using UnityEngine;
 
 public class EnemyTrackData : MonoBehaviour
 {
-    private Transform EndPoint;
+  public static event Action<GameObject> EndReached;
+  private Transform EndPoint;
+  void Start()
+  {
+    Transform[] tempWp = GameObject.FindGameObjectWithTag("WayPoints").GetComponentsInChildren<Transform>();
+    EndPoint = tempWp[tempWp.Length - 1];
+  }
 
-    public static event Action<GameObject> EndReached;
-    void Start()
+  void Update()
+  {
+    if (transform.position == EndPoint.position)
     {
-        
+      EndReached?.Invoke(gameObject);
     }
-
-    void Update()
-    {
-        if (transform.position == EndPoint.position)
-        {
-            EndReached?.Invoke(gameObject);
-        }
-    }
-
-
+  }
 }

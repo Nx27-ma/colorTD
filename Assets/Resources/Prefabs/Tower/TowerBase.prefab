@@ -115,7 +115,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 365888492850142535}
-  - component: {fileID: 4081773141263791660}
+  - component: {fileID: 3352921441311706986}
+  - component: {fileID: 4256826011965972894}
   m_Layer: 0
   m_Name: TowerBase
   m_TagString: Untagged
@@ -139,7 +140,7 @@ Transform:
   - {fileID: 9213606426719835299}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4081773141263791660
+--- !u!114 &3352921441311706986
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -148,7 +149,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 8335918206380042341}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e6e59f7dcbfb17a48b6726dd943c0804, type: 3}
+  m_Script: {fileID: 11500000, guid: ea21a33b96ebb05409b6ff7176a4ffd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 0}
+  TowerColor: 0
+  TowerType: 0
+  TowerActive: 0
+--- !u!114 &4256826011965972894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8335918206380042341}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2353359489aba6d478840b27ab10f694, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

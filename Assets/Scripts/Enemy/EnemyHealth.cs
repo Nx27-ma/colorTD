@@ -1,8 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class EnemyHealth : ScriptableObject
+public record EnemyHealth 
 {
     public float Red, Green, Blue;
 }
