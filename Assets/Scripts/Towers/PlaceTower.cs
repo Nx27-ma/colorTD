@@ -7,13 +7,12 @@ namespace Tower
   public class PlaceTower : MonoBehaviour
   {
     public static event Action TowerPlaced;
-    bool towerPressed;
     static Vector3 correctedMousePos = new();
-    TowerData TowerData;
+    TowerData towerData;
     void Start()
     {
-      TowerData = gameObject.GetComponent<TowerData>();
-      TowerPlaced += UpdateTowerData;
+      towerData = gameObject.GetComponent<TowerData>();
+      TowerPlaced += updateTowerData;
     }
 
     void Update()
@@ -30,9 +29,9 @@ namespace Tower
       }
     }
 
-    void UpdateTowerData()
+    void updateTowerData()
     {
-      TowerData.TowerActive = true;
+      towerData.TowerActive = true;
       Destroy(this);
     }
   }

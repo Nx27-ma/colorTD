@@ -1,0 +1,29 @@
+classDiagram 
+
+PlaceTower --> PurchaseUI
+TowerData --> PurchaseUI
+PurchaseUI ..> TowerData
+
+
+	class PurchaseUI {
+		-towerPrefab: GameObject
+		-buttonPressed: GameObject
+		-button: Button
+		+PurchaseRequest() void
+		-Start() void
+		-enableButton() void
+	}
+	class TowerData{
+		~TowerColor: enum
+		~TowerType: enum
+		~TowerActive: bool
+	}
+	class PlaceTower{
+		+TowerPlaced: event Action$
+		-correctedMousePos: Vector3$
+		-towerdata: TowerData
+		-Update() void
+		-updateTowerData() void
+	}
+``` 
+https://mermaid.js.org/syntax/classDiagram.html
