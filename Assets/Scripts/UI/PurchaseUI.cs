@@ -6,9 +6,8 @@ using UnityEngine.UI;
 
 public class PurchaseUI : MonoBehaviour
 {
-  GameObject towerPrefab;
+  GameObject towerPrefab, buttonPressed;
   Button button;
-  GameObject buttonPressed;
   void Start()
   {
     towerPrefab = Resources.Load<GameObject>("Prefabs/Tower/TowerBase");
