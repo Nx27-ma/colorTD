@@ -11,7 +11,6 @@ public class GridContainer
     this.x = x;
     this.y = y;
     Grid = generateMapArrays<ICellContent>(x, y);
-    ICellContent.GetAllOfType<ICellContent>();
   }
 
   T[,] generateMapArrays<T>(int x, int y) 
