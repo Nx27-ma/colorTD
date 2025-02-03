@@ -1,21 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class GridContainer
+namespace Map
 {
-  ICellContent[,] Grid;
-  int x, y;
-  public GridContainer(int x, int y)
+  public class GridContainer
   {
-    this.x = x;
-    this.y = y;
-    Grid = generateMapArrays<ICellContent>(x, y);
-  }
+    ICellContent[,] Grid;
+    int x, y;
+    public GridContainer(int x, int y)
+    {
+      this.x = x;
+      this.y = y;
+      Grid = generateMapArrays<ICellContent>(x, y);
+    }
 
-  T[,] generateMapArrays<T>(int x, int y) 
-  {
-    T[,] ints = new T[x,y];
-    return ints;
+    T[,] generateMapArrays<T>(int x, int y)
+    {
+      T[,] ints = new T[x, y];
+      return ints;
+    }
   }
 }

@@ -1,7 +1,11 @@
 using System;
 
-public interface ICellContent
+namespace Map
 {
-  Object GetCellInfo();
-}
+  internal interface ICellContent
+  {
 
+    Object GetCellInfo();
+  }
+
+}
