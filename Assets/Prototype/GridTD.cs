@@ -18,7 +18,7 @@ public class GridTD : MonoBehaviour
       for (int y = 0; y < YCells; y++)
       {
         GridCell cell = new();
-        cell.Cell.transform.position = new Vector3(x * SizeBetweenCells, y * SizeBetweenCells, 0);
+        cell.Cell.transform.position = new Vector3(x * SizeBetweenCells + transform.position.x, y * SizeBetweenCells + transform.position.y, 0);
 
         cells[x,y] = cell;
         this.x = x;
@@ -27,13 +27,13 @@ public class GridTD : MonoBehaviour
     }
   }
 #if UNITY_EDITOR
-  private void Update()
+  private void FixedUpdate()
   {
     for (int x = 0; x < XCells; x++)
     {
       for (int y = 0; y < YCells; y++)
       {
-        cells[x, y].Cell.transform.position = new Vector3(x * SizeBetweenCells, y * SizeBetweenCells, 0);
+        cells[x, y].Cell.transform.position = new Vector3(x * SizeBetweenCells + transform.position.x, y * SizeBetweenCells + transform.position.y, 0);
       }
     }
   }

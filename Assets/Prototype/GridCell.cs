@@ -7,16 +7,18 @@ public class GridCell
   public GameObject Cell;
   public BoxCollider2D BoxCollider;
   public SpriteRenderer SpriteRenderer;
-  bool IsOccupied;
-  Sprite Sprite;
+  [SerializeField] bool isOccupied;
+  [SerializeField] Sprite sprite;
 
   public GridCell(bool startActive = true)
   {
+    isOccupied = startActive;
     Cell = new GameObject("Cell");
     BoxCollider = Cell.AddComponent<BoxCollider2D>();
     SpriteRenderer = Cell.AddComponent<SpriteRenderer>();
-    IsOccupied = startActive;
-    Sprite = Resources.Load<Sprite>("GridTiles/Cell");
-
+    sprite = Resources.Load<Sprite>("GridTiles/WhiteGridTileBasic");
+    SpriteRenderer.sprite = sprite;
+    SpriteRenderer.drawMode = SpriteDrawMode.Sliced;
+    SpriteRenderer.size = new Vector2(1, 1);
   }
 }

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[RequireComponent(typeof(GridTD) , typeof(CursorTD))]
+[RequireComponent(typeof(GridTD))]
 
 public class GridSnapping : MonoBehaviour
 {
@@ -23,7 +23,7 @@ public class GridSnapping : MonoBehaviour
         }
         else
         {
-          
+          grid.cells[x, y].SpriteRenderer.color = Color.white;
         }
       }
     }
