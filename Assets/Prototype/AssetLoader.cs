@@ -5,14 +5,23 @@ using UnityEngine;
 public static class AssetLoader
 {
   public static Dictionary<TowerTypes, GameObject> TowerPrefabs;
+  static GameObject[] towers;
   static AssetLoader()
   {
-    GameObject[] towers = Resources.LoadAll<GameObject>("Towers");
-    Debug.Log(towers);
+    TowerPrefabs = new();
+    try
+    {
+      towers = Resources.LoadAll<GameObject>("Towers/");
+    }
+    catch (Exception e)
+    {
+      Debug.LogError($"{e }");
+      return;
+    }
+
     foreach (GameObject tower in towers)
     {
       TowerPrefabs.Add((TowerTypes)Enum.Parse(typeof(TowerTypes), tower.name), tower);
     }
-    Debug.Log(TowerPrefabs);
   }
 }

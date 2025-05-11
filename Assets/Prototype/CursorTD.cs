@@ -9,11 +9,6 @@ public class CursorTD : MonoBehaviour
   
 
   RaycastHit2D hit;
-  void Start()
-  {
-    
-  }
-
   void FixedUpdate()
   {
     CursorPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
