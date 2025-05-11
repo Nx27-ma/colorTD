@@ -4,6 +4,7 @@ using UnityEngine;
 public class CursorTD : MonoBehaviour
 {
   public static event Action<GameObject> IsCursorInCollider;
+  public static event Action<GameObject> IsBeingClickedOn;
   public Vector2 CursorPos;
   
 
@@ -21,6 +22,10 @@ public class CursorTD : MonoBehaviour
     {
       print(hit.collider.gameObject.name);
       IsCursorInCollider?.Invoke(hit.collider.gameObject);
+      if (Input.GetMouseButtonDown(0))
+      {
+        IsBeingClickedOn?.Invoke(hit.collider.gameObject);
+      }
     }
   }
 }

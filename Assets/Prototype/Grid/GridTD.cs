@@ -1,7 +1,5 @@
 using UnityEngine;
 
-
-[RequireComponent(typeof(GridCell))]
 public class GridTD : MonoBehaviour
 {
   public int XCells;

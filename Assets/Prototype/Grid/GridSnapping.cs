@@ -1,9 +1,11 @@
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(GridTD))]
 
 public class GridSnapping : MonoBehaviour
 {
+  public static event Action<GameObject> HoveringOverGrid;
   GridTD grid;
   void Start()
   {
@@ -20,6 +22,7 @@ public class GridSnapping : MonoBehaviour
         if (gameObject == grid.cells[x,y].Cell)
         {
           grid.cells[x, y].SpriteRenderer.color = Color.red;
+          HoveringOverGrid?.Invoke(grid.cells[x, y].Cell);
         }
         else
         {
