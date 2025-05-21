@@ -1,24 +1,26 @@
 using UnityEngine;
+using static AssetLoader;
 
 public class GridTD : MonoBehaviour
 {
   public int XCells;
   public int YCells;
   public float SizeBetweenCells;
-  public GridCell[,] cells;
+  public GameObject[,] cells;
 
-  public int x, y;
+  int x, y;
   void Start()
   {
-    cells = new GridCell[XCells, YCells];
+    GameObject grid = GameObject.Find("Grid");
+    cells = new GameObject[XCells, YCells];
     for (int x = 0; x < XCells; x++)
     {
       for (int y = 0; y < YCells; y++)
       {
-        GridCell cell = new();
-        cell.Cell.transform.position = new Vector3(x * SizeBetweenCells + transform.position.x, y * SizeBetweenCells + transform.position.y, 0);
+        GameObject cell = Instantiate(GridTilePrefabs[0], grid.transform);
+        cell.transform.position = new Vector3(x * SizeBetweenCells + transform.position.x, y * SizeBetweenCells + transform.position.y, 0);
 
-        cells[x,y] = cell;
+        cells[x, y] = cell;
         this.x = x;
         this.y = y;
       }
@@ -31,7 +33,7 @@ public class GridTD : MonoBehaviour
     {
       for (int y = 0; y < YCells; y++)
       {
-        cells[x, y].Cell.transform.position = new Vector3(x * SizeBetweenCells + transform.position.x, y * SizeBetweenCells + transform.position.y, 0);
+        cells[x, y].transform.position = new Vector3(x * SizeBetweenCells + transform.position.x, y * SizeBetweenCells + transform.position.y, 0);
       }
     }
   }

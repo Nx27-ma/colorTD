@@ -6,7 +6,7 @@ public class PlaceOnGrid : MonoBehaviour
   CursorTD cursor;
   void Start()
   {
-    cursor = GetComponent<CursorTD>();
+    cursor = GameObject.Find("ScriptInitializer").GetComponent<CursorTD>();
     GridSnapping.HoveringOverGrid += placeTower;
   }
   void FixedUpdate()
